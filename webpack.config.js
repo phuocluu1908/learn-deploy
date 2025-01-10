@@ -17,7 +17,11 @@ module.exports = {
     port: 3005,
     hot: true,  
   },
-
+  output: {
+    path: path.resolve(__dirname, 'build'), // Output directory
+    filename: 'bundle.js', // Name of the main output file
+    publicPath: '/learn-deploy/', // URL path for resources
+  },
   module: {
     rules: [
       {
@@ -35,8 +39,6 @@ module.exports = {
       // Add more loaders here as needed (e.g., images, fonts, Sass, etc.)
     ],
   },
-
-  // 5. Plugins:
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html', 
