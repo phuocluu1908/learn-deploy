@@ -3,7 +3,7 @@ name: Deploy React App to GitHub Pages
 on:
   push:
     branches:
-      - master # Run the workflow whenever changes are pushed to the 'main' branch
+      - master
 
 jobs:
   build-and-deploy:
@@ -14,21 +14,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js environment
+      # Step 2: Configure Git
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      # Step 3: Set up Node.js environment
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20 # Ensure this matches your project's Node.js version
+          node-version: 16
 
-      # Step 3: Install dependencies
+      # Step 4: Install dependencies
       - name: Install dependencies
-        run: yarn install # Use 'npm install' if you use npm
+        run: yarn install
 
-      # Step 4: Build the React app
+      # Step 5: Build the app
       - name: Build the app
         run: yarn build
 
-      # Step 5: Deploy to GitHub Pages
+      # Step 6: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
